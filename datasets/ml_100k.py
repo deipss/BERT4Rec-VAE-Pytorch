@@ -5,10 +5,10 @@ import pandas as pd
 from datetime import date
 
 
-class ML1MDataset(AbstractDataset):
+class ML100KDataset(AbstractDataset):
     @classmethod
     def code(cls):
-        return 'ml-1m'
+        return 'ml-100k'
 
     @classmethod
     def url(cls):
