@@ -18,6 +18,7 @@ class BERT(nn.Module):
         heads = args.bert_num_heads
         vocab_size = num_items + 2
         hidden = args.bert_hidden_units
+        bilstm_num = args.bilstm_num
         self.hidden = hidden
         dropout = args.bert_dropout
 
