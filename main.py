@@ -13,10 +13,10 @@ def train():
     model = model_factory(args)
     trainer = trainer_factory(args, model, train_loader, val_loader, test_loader, export_root)
     trainer.train()
+    trainer.test()
 
-    test_model = (input('Test model with test dataset? y/[n]: ') == 'y')
-    if test_model:
-        trainer.test()
+    # test_model = (input('Test model with test dataset? y/[n]: ') == 'y')
+    # if test_model:
 
 
 if __name__ == '__main__':
