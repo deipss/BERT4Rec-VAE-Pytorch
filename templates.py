@@ -4,6 +4,7 @@ def set_template(args):
 
     elif args.template.startswith('train_bert'):
         args.mode = 'train'
+        args.bilstm_num=1
 
         #args.dataset_code = 'ml-' + input('Input 1 for ml-1m, 20 for ml-20m: ') + 'm'
         args.dataset_code = 'ml-100k'
