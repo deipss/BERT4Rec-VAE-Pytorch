@@ -1,7 +1,7 @@
 *.un~
 *.pyc
 *.swp
-*.json
+# *.json
 res/
 .DS_Store
 
