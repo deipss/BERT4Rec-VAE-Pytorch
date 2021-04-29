@@ -191,3 +191,5 @@ pip-selfcheck.json
 
 
 
+experiments/
+!*.json
