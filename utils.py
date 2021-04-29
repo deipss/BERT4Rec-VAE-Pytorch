@@ -24,16 +24,16 @@ def setup_train(args):
 
 
 def create_experiment_export_folder(args):
-    experiment_dir, experiment_description = args.experiment_dir, args.experiment_description
+    experiment_dir, experiment_description = args.experiment_dir, args.experiment_description + '_' + args.model_code + '_' + str(args.dim)
     if not os.path.exists(experiment_dir):
         os.mkdir(experiment_dir)
-    experiment_path = get_name_of_experiment_path(experiment_dir, experiment_description)
+    experiment_path = get_name_of_experiment_path(experiment_dir, experiment_description, args)
     os.mkdir(experiment_path)
     print('Folder created: ' + os.path.abspath(experiment_path))
     return experiment_path
 
 
-def get_name_of_experiment_path(experiment_dir, experiment_description):
+def get_name_of_experiment_path(experiment_dir, experiment_description, args):
     experiment_path = os.path.join(experiment_dir, (experiment_description + "_" + str(date.today())))
     idx = _get_experiment_index(experiment_path)
     experiment_path = experiment_path + "_" + str(idx)
