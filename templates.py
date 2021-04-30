@@ -102,13 +102,13 @@ def set_template(args):
     elif args.template.startswith('train_dae'):
         args.mode = 'train'
 
-        args.dataset_code = 'ml-1m'
+        args.dataset_code = 'ml-20m'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
         args.split = 'holdout'
         args.dataset_split_seed = 98765
-        args.eval_set_size = 500 if args.dataset_code == 'ml-1m' else 10000
+        args.eval_set_size = 100 if args.dataset_code == 'ml-1m' else 500
 
         args.dataloader_code = 'ae'
         batch = 128 if args.dataset_code == 'ml-1m' else 512
@@ -139,7 +139,7 @@ def set_template(args):
     elif args.template.startswith('train_vae_search_beta'):
         args.mode = 'train'
 
-        args.dataset_code = 'ml-1m'
+        args.dataset_code = 'ml-20m'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
@@ -178,7 +178,7 @@ def set_template(args):
     elif args.template.startswith('train_vae_give_beta'):
         args.mode = 'train'
 
-        args.dataset_code = 'ml-1m'
+        args.dataset_code = 'ml-20m'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
