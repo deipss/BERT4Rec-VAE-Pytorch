@@ -73,7 +73,7 @@ parser.add_argument('--num_epochs', type=int, default=100, help='Number of epoch
 # logger #
 parser.add_argument('--log_period_as_iter', type=int, default=12800)
 # evaluation #
-parser.add_argument('--metric_ks', nargs='+', type=int, default=[1, 5, 10, 15, 20], help='ks for Metric@k')
+parser.add_argument('--metric_ks', nargs='+', type=int, default=[1, 5, 10, 15, 20, 25], help='ks for Metric@k')
 parser.add_argument('--best_metric', type=str, default='NDCG@10', help='Metric for determining the best model')
 # Finding optimal beta for VAE #
 parser.add_argument('--find_best_beta', type=bool, default=False,
@@ -88,13 +88,13 @@ parser.add_argument('--anneal_cap', type=float, default=0.2,
 parser.add_argument('--model_code', type=str, default='bert', choices=MODELS.keys())
 parser.add_argument('--model_init_seed', type=int, default=None)
 # BERT #
-parser.add_argument('--bert_max_len', type=int, default=None, help='Length of sequence for bert')
+parser.add_argument('--bert_max_len', type=int, default=100, help='Length of sequence for bert')
 parser.add_argument('--bert_num_items', type=int, default=None, help='Number of total items')
-parser.add_argument('--bert_hidden_units', type=int, default=None, help='Size of hidden vectors (d_model)')
-parser.add_argument('--bert_num_blocks', type=int, default=None, help='Number of transformer layers')
-parser.add_argument('--bert_num_heads', type=int, default=None, help='Number of heads for multi-attention')
-parser.add_argument('--bert_dropout', type=float, default=None, help='Dropout probability to use throughout the model')
-parser.add_argument('--bert_mask_prob', type=float, default=None,
+parser.add_argument('--bert_hidden_units', type=int, default=100, help='Size of hidden vectors (d_model)')
+parser.add_argument('--bert_num_blocks', type=int, default=2, help='Number of transformer layers')
+parser.add_argument('--bert_num_heads', type=int, default=4, help='Number of heads for multi-attention')
+parser.add_argument('--bert_dropout', type=float, default=0.1, help='Dropout probability to use throughout the model')
+parser.add_argument('--bert_mask_prob', type=float, default=0.1,
                     help='Probability for masking items in the training sequence')
 # BERTCNN #
 parser.add_argument('--kernel_size', type=int, default=3, help='cnn kernel_size')
