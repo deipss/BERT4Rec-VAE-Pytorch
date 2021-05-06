@@ -4,6 +4,9 @@ from abc import ABCMeta, abstractmethod
 import torch
 
 
+CUR_PATH = os.path.abspath(__file__)
+FATHER_PATH = os.path.abspath(os.path.dirname(CUR_PATH) + os.path.sep + ".")
+
 def save_state_dict(state_dict, path, filename):
     torch.save(state_dict, os.path.join(path, filename))
 
@@ -74,7 +77,7 @@ class BestModelLogger(AbstractBaseLogger):
             print("Update Best {} Model at {}".format(self.metric_key, kwargs['epoch']))
             self.best_metric = current_metric
             save_state_dict(kwargs['state_dict'], self.checkpoint_path, self.filename)
-            save_state_dict(kwargs['state_dict'], './best', self.filename)
+            save_state_dict(kwargs['state_dict'], FATHER_PATH+'/best', self.filename)
 
 
 class MetricGraphPrinter(AbstractBaseLogger):
