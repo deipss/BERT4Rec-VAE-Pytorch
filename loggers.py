@@ -74,6 +74,7 @@ class BestModelLogger(AbstractBaseLogger):
             print("Update Best {} Model at {}".format(self.metric_key, kwargs['epoch']))
             self.best_metric = current_metric
             save_state_dict(kwargs['state_dict'], self.checkpoint_path, self.filename)
+            save_state_dict(kwargs['state_dict'], './best', self.filename)
 
 
 class MetricGraphPrinter(AbstractBaseLogger):

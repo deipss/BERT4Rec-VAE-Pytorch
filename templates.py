@@ -54,7 +54,7 @@ def set_template(args):
     elif args.template.startswith('train_bert'):
         args.mode = 'train'
         # args.dataset_code = 'ml-' + input('Input 1 for ml-1m, 20 for ml-20m: ') + 'm'
-        args.dataset_code = 'ml-20m'
+        args.dataset_code = 'db'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
@@ -76,7 +76,7 @@ def set_template(args):
         args.trainer_code = 'bert'
         args.device = 'cuda'
         args.num_gpu = 2
-        args.device_idx = '1'
+        args.device_idx = '0'
         args.optimizer = 'Adam'
         args.lr = 0.001
         args.enable_lr_schedule = True
@@ -90,7 +90,7 @@ def set_template(args):
         args.model_init_seed = 0
 
         args.bert_dropout = 0.1
-        args.bert_hidden_units = 256
+        args.bert_hidden_units = 64
         args.bert_mask_prob = 0.15
         args.bert_max_len = 100
         args.bert_num_blocks = 2

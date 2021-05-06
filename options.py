@@ -12,7 +12,9 @@ parser = argparse.ArgumentParser(description='RecPlay')
 # Top Level
 ################
 parser.add_argument('--mode', type=str, default='train', choices=['train'])
-parser.add_argument('--template', type=str, default=None)
+parser.add_argument('--template', type=str, default='train_bert')
+parser.add_argument('--db', type=bool, default=True)
+parser.add_argument('--dim', type=int, default=64)
 
 ################
 # Test
@@ -58,7 +60,7 @@ parser.add_argument('--test_negative_sampling_seed', type=int, default=0)
 parser.add_argument('--trainer_code', type=str, default='bert', choices=TRAINERS.keys())
 # device #
 parser.add_argument('--device', type=str, default='cuda', choices=['cpu', 'cuda'])
-parser.add_argument('--num_gpu', type=int, default=2)
+parser.add_argument('--num_gpu', type=int, default=1)
 parser.add_argument('--device_idx', type=str, default='0')
 # optimizer #
 parser.add_argument('--optimizer', type=str, default='Adam', choices=['SGD', 'Adam'])
@@ -118,7 +120,6 @@ parser.add_argument('--vae_dropout', type=float, default=0.5, help='Probability 
 ################
 parser.add_argument('--experiment_dir', type=str, default='experiments')
 parser.add_argument('--experiment_description', type=str, default='test')
-parser.add_argument('--dim', type=int, default='256')
 
 ################
 args = parser.parse_args()

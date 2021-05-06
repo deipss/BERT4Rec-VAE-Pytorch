@@ -4,6 +4,7 @@ from config import RAW_DATASET_ROOT_FOLDER
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
+
 tqdm.pandas()
 
 from abc import *
@@ -62,29 +63,33 @@ class AbstractDataset(metaclass=ABCMeta):
 
     def preprocess(self):
         dataset_path = self._get_preprocessed_dataset_path()
-        if dataset_path.is_file():
-            print('Already preprocessed. Skip preprocessing')
-            return
+        # 每次训练生成新的文件
+        # if dataset_path.is_file():
+        #     print('Already preprocessed. Skip preprocessing')
+        #     return
         if not dataset_path.parent.is_dir():
             dataset_path.parent.mkdir(parents=True)
         self.maybe_download_raw_dataset()
         df = self.load_ratings_df()
         df = self.make_implicit(df)
         df = self.filter_triplets(df)
-        df, umap, smap = self.densify_index(df)
+        df, umap, smap,sidmap = self.densify_index(df)
         train, val, test = self.split_df(df, len(umap))
         dataset = {'train': train,
                    'val': val,
                    'test': test,
                    'umap': umap,
+                   'sidmap': sidmap,
                    'smap': smap}
         with dataset_path.open('wb') as f:
             pickle.dump(dataset, f)
 
     def maybe_download_raw_dataset(self):
+        # 返回，从DB中取出数据
+        return
         folder_path = self._get_rawdata_folder_path()
-        if folder_path.is_dir() and\
-           all(folder_path.joinpath(filename).is_file() for filename in self.all_raw_file_names()):
+        if folder_path.is_dir() and \
+                all(folder_path.joinpath(filename).is_file() for filename in self.all_raw_file_names()):
             print('Raw data already exists. Skip downloading')
             return
         print("Raw file doesn't exist. Downloading...")
@@ -130,11 +135,27 @@ class AbstractDataset(metaclass=ABCMeta):
 
     def densify_index(self, df):
         print('Densifying index')
+        sid_df_set = set(df['sid'])
+        if self.args.db:
+            sid_df_set=sid_df_set.union(set(self.read_items()))
         umap = {u: i for i, u in enumerate(set(df['uid']))}
-        smap = {s: i for i, s in enumerate(set(df['sid']))}
+        smap = {s: i for i, s in enumerate(sid_df_set)}
+        sidmap = {i: s for i, s in enumerate(sid_df_set)}
         df['uid'] = df['uid'].map(umap)
         df['sid'] = df['sid'].map(smap)
-        return df, umap, smap
+        return df, umap, smap,sidmap
+
+        # Reading items file:
+
+    def read_items(self):
+        from sqlalchemy import create_engine
+        db_connection_str = 'mysql+pymysql://root:deipss@127.0.0.1/lotus'
+        db_connection = create_engine(db_connection_str)
+        cnx = db_connection.connect()
+        df = pd.read_sql('SELECT mid as sid FROM movie order by mid limit 10000 ', con=cnx)
+        cnx.close()
+        df.columns = ['sid']
+        return df['sid']
 
     def split_df(self, df, user_count):
         if self.args.split == 'leave_one_out':
@@ -153,19 +174,19 @@ class AbstractDataset(metaclass=ABCMeta):
 
             # Generate user indices
             permuted_index = np.random.permutation(user_count)
-            train_user_index = permuted_index[                :-2*eval_set_size]
-            val_user_index   = permuted_index[-2*eval_set_size:  -eval_set_size]
-            test_user_index  = permuted_index[  -eval_set_size:                ]
+            train_user_index = permuted_index[:-2 * eval_set_size]
+            val_user_index = permuted_index[-2 * eval_set_size:  -eval_set_size]
+            test_user_index = permuted_index[-eval_set_size:]
 
             # Split DataFrames
             train_df = df.loc[df['uid'].isin(train_user_index)]
-            val_df   = df.loc[df['uid'].isin(val_user_index)]
-            test_df  = df.loc[df['uid'].isin(test_user_index)]
+            val_df = df.loc[df['uid'].isin(val_user_index)]
+            test_df = df.loc[df['uid'].isin(test_user_index)]
 
             # DataFrame to dict => {uid : list of sid's}
             train = dict(train_df.groupby('uid').progress_apply(lambda d: list(d['sid'])))
-            val   = dict(val_df.groupby('uid').progress_apply(lambda d: list(d['sid'])))
-            test  = dict(test_df.groupby('uid').progress_apply(lambda d: list(d['sid'])))
+            val = dict(val_df.groupby('uid').progress_apply(lambda d: list(d['sid'])))
+            test = dict(test_df.groupby('uid').progress_apply(lambda d: list(d['sid'])))
             return train, val, test
         else:
             raise NotImplementedError
@@ -190,4 +211,3 @@ class AbstractDataset(metaclass=ABCMeta):
     def _get_preprocessed_dataset_path(self):
         folder = self._get_preprocessed_folder_path()
         return folder.joinpath('dataset.pkl')
-
