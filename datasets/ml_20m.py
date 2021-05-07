@@ -47,7 +47,8 @@ class ML20MDataset(AbstractDataset):
         umap = {u: i for i, u in enumerate(meta_set)}
 
         df['smeta'] = df['smeta'].map(lambda x: umap[x])
-        df['sid'] = df['sid'].map(lambda x: smap[x])
+        set_smap = smap.keys()
+        df['sid'] = df['sid'].map(lambda x: smap[x] if x in set_smap else x)
 
         map = df.set_index('sid').T.to_dict('int')
         return map['smeta']
