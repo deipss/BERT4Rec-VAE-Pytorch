@@ -30,7 +30,7 @@ def set_template(args):
         args.trainer_code = 'bert'
         args.device = 'cuda'
         args.num_gpu = 2
-        args.device_idx = '0'
+        args.device_idx = '1'
         args.optimizer = 'Adam'
         args.lr = 0.001
         args.enable_lr_schedule = True
