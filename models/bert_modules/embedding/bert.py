@@ -1,6 +1,7 @@
 import torch.nn as nn
 from .token import TokenEmbedding
 from .position import PositionalEmbedding
+from .meta import MetaEmbedding
 
 
 class BERTEmbedding(nn.Module):
@@ -22,10 +23,10 @@ class BERTEmbedding(nn.Module):
         super().__init__()
         self.token = TokenEmbedding(vocab_size=vocab_size, embed_size=embed_size)
         self.position = PositionalEmbedding(max_len=max_len, d_model=embed_size)
-        # self.segment = SegmentEmbedding(embed_size=self.token.embedding_dim)
+        self.meta = MetaEmbedding(vocab_size=21, embed_size=self.token.embedding_dim)
         self.dropout = nn.Dropout(p=dropout)
         self.embed_size = embed_size
 
-    def forward(self, sequence):
-        x = self.token(sequence) + self.position(sequence)  # + self.segment(segment_label)
+    def forward(self, sequence, meta):
+        x = self.token(sequence) + self.position(sequence) + self.meta(meta)  # + self.segment(segment_label)
         return self.dropout(x)

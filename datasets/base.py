@@ -54,6 +54,10 @@ class AbstractDataset(metaclass=ABCMeta):
     def load_ratings_df(self):
         pass
 
+    @abstractmethod
+    def generate_meta_map(self,smap):
+        pass
+
     def load_dataset(self):
         self.preprocess()
         dataset_path = self._get_preprocessed_dataset_path()
@@ -73,10 +77,12 @@ class AbstractDataset(metaclass=ABCMeta):
         df = self.filter_triplets(df)
         df, umap, smap = self.densify_index(df)
         train, val, test = self.split_df(df, len(umap))
+        meta_map = self.generate_meta_map(smap)
         dataset = {'train': train,
                    'val': val,
                    'test': test,
                    'umap': umap,
+                   'meta_map': meta_map,
                    'smap': smap}
         with dataset_path.open('wb') as f:
             pickle.dump(dataset, f)

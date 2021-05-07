@@ -35,4 +35,19 @@ class ML20MDataset(AbstractDataset):
         df.columns = ['uid', 'sid', 'rating', 'timestamp']
         return df
 
+    def generate_meta_map(self, smap):
+        folder_path = self._get_rawdata_folder_path()
+        file_path = folder_path.joinpath('movies.csv')
+        df = pd.read_csv(file_path, sep=',', header=None)
+        df.columns = ['sid', 'sname', 'smeta']
+        df['smeta'] = df['smeta'].map(lambda x: x.split("|")[0].strip())
+        del df['sname']
 
+        meta_set = set(df['smeta'].values)
+        umap = {u: i for i, u in enumerate(meta_set)}
+
+        df['smeta'] = df['smeta'].map(lambda x: umap[x])
+        df['sid'] = df['sid'].map(lambda x: smap[x])
+
+        map = df.set_index('sid').T.to_dict('int')
+        return map['smeta']

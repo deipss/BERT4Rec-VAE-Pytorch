@@ -33,3 +33,5 @@ class ML100KDataset(AbstractDataset):
         return df
 
 
+    def generate_meta_map(self, smap):
+        return None
