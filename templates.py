@@ -82,7 +82,7 @@ def set_template(args):
         args.enable_lr_schedule = True
         args.decay_step = 25
         args.gamma = 1.0
-        args.num_epochs = 100 if args.dataset_code == 'ml-1m' else 50
+        args.num_epochs = 100 if args.dataset_code == 'ml-1m' else 80
         args.metric_ks = [1, 5, 10, 15, 20, 25, 30]
         args.best_metric = 'NDCG@10'
 
