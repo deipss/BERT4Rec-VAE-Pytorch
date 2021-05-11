@@ -1,15 +1,4 @@
-emb_id=11	movie_id=12
-12	Dracula: Dead and Loving It (1995)	Comedy|Horror
-808	Alaska (1996)	Adventure|Children's
-1499	Anaconda (1997)	Action|Adventure|Thriller
-2354	Rugrats Movie, The (1998)	Animation|Children's|Comedy
-1926	Broadway Melody, The (1929)	Musical
-465	Heaven & Earth (1993)	Action|Drama|War
-3554	Love and Basketball (2000)	Drama|Romance
-3782	Shaft's Big Score! (1972)	Action|Crime
-3562	Committed (2000)	Comedy|Drama
-1381	Grease 2 (1982)	Comedy|Musical|Romance
-1869	Black Dog (1998)	Action|Thriller
+[[16, 1164, 2488, 963, 537, 840, 1500, 587, 1439, 648, 1423], [69, 940, 811, 2950, 180, 1459, 372, 3232, 1067, 3652, 1939], [43, 3019, 735, 2742, 1412, 3231, 147, 934, 404, 2303, 181], [95, 2612, 2596, 1813, 2731, 172, 1915, 661, 237, 249, 3362], [487, 3237, 2667, 442, 1375, 3201, 1111, 3564, 1144, 1163, 1629]]
 emb_id=16	movie_id=17
 17	Sense and Sensibility (1995)	Drama|Romance
 1256	Duck Soup (1933)	Comedy|War
@@ -34,54 +23,6 @@ emb_id=69	movie_id=71
 1149	JLG/JLG - autoportrait de d�cembre (1994)	Documentary|Drama
 3898	Bait (2000)	Action|Comedy
 2120	Needful Things (1993)	Drama|Horror
-emb_id=171	movie_id=177
-177	Lord of Illusions (1995)	Horror
-884	Sweet Nothing (1995)	Drama
-236	French Kiss (1995)	Comedy|Romance
-2799	Problem Child 2 (1991)	Comedy
-1918	Lethal Weapon 4 (1998)	Action|Comedy|Crime|Drama
-2769	Yards, The (1999)	Crime|Mystery
-1735	Great Expectations (1998)	Drama|Romance
-662	Fear (1996)	Thriller
-1487	Selena (1997)	Drama|Musical
-1507	Paradise Road (1997)	Drama|War
-2025	Lolita (1997)	Drama|Romance
-emb_id=35	movie_id=36
-36	Dead Man Walking (1995)	Drama
-1370	Die Hard 2 (1990)	Action|Thriller
-947	My Man Godfrey (1936)	Comedy
-1500	Grosse Pointe Blank (1997)	Comedy|Crime
-3083	All About My Mother (Todo Sobre Mi Madre) (1999)	Comedy|Drama
-39	Clueless (1995)	Comedy|Romance
-2467	Name of the Rose, The (1986)	Mystery
-1042	That Thing You Do! (1996)	Comedy
-1228	Raging Bull (1980)	Drama
-1294	M*A*S*H (1970)	Comedy|War
-72	Kicking and Screaming (1995)	Comedy|Drama
-emb_id=22	movie_id=23
-23	Assassins (1995)	Thriller
-2037	Candleshoe (1977)	Adventure|Children's|Comedy
-2423	Christmas Vacation (1989)	Comedy
-271	Losing Isaiah (1995)	Drama
-2745	Mission, The (1986)	Drama
-690	Promise, The (Versprechen, Das) (1994)	Romance
-312	Stuart Saves His Family (1995)	Comedy
-605	One Fine Day (1996)	Drama|Romance
-2011	Back to the Future Part II (1989)	Comedy|Sci-Fi
-1064	Aladdin and the King of Thieves (1996)	Animation|Children's|Comedy
-2816	Iron Eagle II (1988)	Action|War
-emb_id=74	movie_id=76
-76	Screamers (1995)	Sci-Fi|Thriller
-1844	Live Flesh (1997)	Drama
-469	House of the Spirits, The (1993)	Drama|Romance
-1053	Normal Life (1996)	Crime|Drama
-218	Boys on the Side (1995)	Comedy|Drama
-3694	Toxic Avenger, Part II, The (1989)	Comedy|Horror
-778	Trainspotting (1996)	Drama
-84	Last Summer in the Hamptons (1995)	Comedy|Drama
-3017	Creepshow 2 (1987)	Horror
-80	White Balloon, The (Badkonake Sefid ) (1995)	Drama
-1010	Love Bug, The (1969)	Children's|Comedy
 emb_id=43	movie_id=44
 44	Mortal Kombat (1995)	Action|Adventure
 3243	Encino Man (1992)	Comedy
@@ -106,15 +47,15 @@ emb_id=95	movie_id=98
 244	Gumby: The Movie (1995)	Animation|Children's
 256	Junior (1994)	Comedy|Sci-Fi
 3602	G. I. Blues (1960)	Musical
-emb_id=327	movie_id=337
-337	What's Eating Gilbert Grape (1993)	Drama
-2788	And Now for Something Completely Different (1971)	Comedy
-3662	Puppet Master III: Toulon's Revenge (1991)	Horror|Sci-Fi|Thriller
-947	My Man Godfrey (1936)	Comedy
-2137	Charlotte's Web (1973)	Animation|Children's
-1350	Omen, The (1976)	Horror
-2165	Your Friends and Neighbors (1998)	Drama
-163	Desperado (1995)	Action|Romance|Thriller
-3421	Animal House (1978)	Comedy
-1302	Field of Dreams (1989)	Drama
-2391	Simple Plan, A (1998)	Crime|Thriller
+emb_id=487	movie_id=501
+501	Naked (1993)	Drama
+3470	Dersu Uzala (1974)	Adventure|Drama
+2874	Pajama Game, The (1957)	Comedy
+456	Fresh (1994)	Drama
+1489	Cats Don't Dance (1997)	Animation|Children's|Musical
+3433	Death Wish 4: The Crackdown (1987)	Action|Drama
+1201	Good, The Bad and The Ugly, The (1966)	Action|Western
+3807	Sinbad and the Eye of the Tiger (1977)	Action|Adventure
+1235	Harold and Maude (1971)	Comedy
+1255	Bad Taste (1987)	Comedy|Horror
+1798	Hush (1998)	Thriller

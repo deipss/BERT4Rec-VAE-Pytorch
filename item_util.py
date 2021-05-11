@@ -59,7 +59,7 @@ def evaluate(emb, top_k, movie_lists):
 def search_neighbor_item():
     # 读取pandas
     df = generate_meta_map()
-    m_list = [12, 17, 71, 177, 36, 23, 76, 44, 98, 337]
+    m_list = [ 17, 71, 44, 98,501]
     # # 加载模型
     get_E()
     m_list = [mid2idx[i] for i in m_list]
