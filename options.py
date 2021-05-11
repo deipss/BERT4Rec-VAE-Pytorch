@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser(description='RecPlay')
 ################
 parser.add_argument('--mode', type=str, default='train', choices=['train'])
 parser.add_argument('--template', type=str, default=None)
+parser.add_argument('--blocks_1m_test', type=bool, default=False)
 
 ################
 # Test
