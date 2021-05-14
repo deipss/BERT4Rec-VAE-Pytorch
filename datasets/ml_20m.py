@@ -40,15 +40,18 @@ class ML20MDataset(AbstractDataset):
         file_path = folder_path.joinpath('movies.csv')
         df = pd.read_csv(file_path)
         df.columns = ['sid', 'sname', 'smeta']
-        df['smeta'] = df['smeta'].map(lambda x: x.split("|")[0].strip())
+        df['smeta'] = df['smeta'].map(lambda x: x.split("|"))
+        meta_set = set()
+        for i in df['smeta'].values:
+            meta_set.update(i)
         del df['sname']
-
-        meta_set = set(df['smeta'].values)
-        umap = {u: i for i, u in enumerate(meta_set)}
-
-        df['smeta'] = df['smeta'].map(lambda x: umap[x])
+        set_len = len(meta_set)
+        umap = {u: i + 1 for i, u in enumerate(meta_set)}
+        # 位运算
+        df['smeta'] = df['smeta'].map(lambda x: [umap[v] for v in x])
+        df['smeta'] = df['smeta'].map(lambda x: x + [0] * (set_len - len(x)))
         set_smap = smap.keys()
         df['sid'] = df['sid'].map(lambda x: smap[x] if x in set_smap else x)
 
         map = df.set_index('sid').T.to_dict('int')
-        return map['smeta']
+        return map['smeta'], len(meta_set)

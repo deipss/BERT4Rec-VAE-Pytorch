@@ -81,6 +81,7 @@ class BertTrainDataset(data_utils.Dataset):
         self.mask_prob = mask_prob
         self.mask_token = mask_token
         self.meta_mask_token = meta_mask_token
+        self.meta_len = meta_mask_token-1
         self.num_items = num_items
         self.meta_map = meta_map
         self.key = meta_map.keys()
@@ -119,7 +120,7 @@ class BertTrainDataset(data_utils.Dataset):
 
         tokens = [0] * mask_len + tokens
         labels = [0] * mask_len + labels
-        metas = [0] * mask_len + metas
+        metas = [[0] * self.meta_len] * mask_len + metas
 
         return torch.LongTensor(tokens), torch.LongTensor(labels), torch.LongTensor(metas),
 
@@ -128,7 +129,7 @@ class BertTrainDataset(data_utils.Dataset):
 
     def _get_meta(self, taken):
         if taken == self.mask_token or taken not in self.key:
-            return self.meta_mask_token
+            return [self.meta_mask_token]+[0]*(self.meta_len-1)
         return self.meta_map[taken]
 
 
@@ -141,9 +142,9 @@ class BertEvalDataset(data_utils.Dataset):
         self.mask_token = mask_token
         self.negative_samples = negative_samples
         self.meta_mask_token = meta_mask_token
+        self.meta_len = meta_mask_token-1
         self.meta_map = meta_map
         self.key = meta_map.keys()
-
 
     def __len__(self):
         return len(self.users)
@@ -165,11 +166,11 @@ class BertEvalDataset(data_utils.Dataset):
 
         padding_len = self.max_len - len(seq)
         seq = [0] * padding_len + seq
-        metas = [0] * padding_len + metas
+        metas = [[0] * self.meta_len] * padding_len + metas
 
         return torch.LongTensor(seq), torch.LongTensor(candidates), torch.LongTensor(labels), torch.LongTensor(metas)
 
     def _get_meta(self, taken):
         if taken == self.mask_token or taken not in self.key:
-            return self.meta_mask_token
+            return [self.meta_mask_token]+[0]*(self.meta_len-1)
         return self.meta_map[taken]
