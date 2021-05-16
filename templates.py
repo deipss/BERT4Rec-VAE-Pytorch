@@ -70,7 +70,7 @@ def set_template(args):
         args.train_negative_sample_size = 0
         args.train_negative_sampling_seed = 0
         args.test_negative_sampler_code = 'random'
-        args.test_negative_sample_size = 100 if args.dataset_code == 'ml-1m' else 500
+        args.test_negative_sample_size = 100 if args.dataset_code == 'ml-1m' else 450
         args.test_negative_sampling_seed = 98765
 
         args.trainer_code = 'bert'
