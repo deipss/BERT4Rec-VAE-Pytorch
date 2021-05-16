@@ -9,7 +9,7 @@ from utils import *
 
 def train():
     export_root = setup_train(args)
-    train_loader, val_loader, test_loader = dataloader_factory(args)
+    train_loader, val_loader, test_loader,_ = dataloader_factory(args)
     print('template = %s\t model_code = %s\n' % (args.template, args.model_code))
     model = model_factory(args)
     trainer = trainer_factory(args, model, train_loader, val_loader, test_loader, export_root)
