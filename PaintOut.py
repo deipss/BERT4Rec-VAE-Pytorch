@@ -39,15 +39,14 @@ def data_load_bert_cnn():
     for root, dirs, files in os.walk(dir):
         for sub_dir in dirs:
             path = root + '/' + sub_dir
-            if 1 ==1  and '20m' in sub_dir:
+            if 1 ==1  and '05-16' in sub_dir:
                 try:
                     data, data_config = {}, {}
                     data_file = open(path + '/logs/' + 'test_metrics.json')
                     data = json.load(data_file)
                     data_file = open(path + '/' + 'config.json')
                     data_config = json.load(data_file)
-                    # if data_config['blocks_1m_test'] == False:
-                    if data_config['num_epochs'] != 80:
+                    if data_config['blocks_1m_test'] == False:
                         continue
                     print('%12s\t%3s\t%10s\t%d\t%d\t%s'
                           % ('Meta'+data_config['model_code'], data_config['dim'], data_config['dataset_code'],
