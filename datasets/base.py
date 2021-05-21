@@ -152,7 +152,7 @@ class AbstractDataset(metaclass=ABCMeta):
         db_connection_str = 'mysql+pymysql://root:deipss@127.0.0.1/lotus'
         db_connection = create_engine(db_connection_str)
         cnx = db_connection.connect()
-        df = pd.read_sql('SELECT mid as sid FROM movie order by mid limit 10000 ', con=cnx)
+        df = pd.read_sql('SELECT mid as sid FROM movie order by mid limit 20000 ', con=cnx)
         cnx.close()
         df.columns = ['sid']
         return df['sid']
