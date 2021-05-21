@@ -24,7 +24,7 @@ def set_template(args):
         args.train_negative_sample_size = 0
         args.train_negative_sampling_seed = 0
         args.test_negative_sampler_code = 'random'
-        args.test_negative_sample_size = 100 if args.dataset_code == 'ml-1m' else 500
+        args.test_negative_sample_size = 100 if args.dataset_code == 'ml-1m' else 200
         args.test_negative_sampling_seed = 98765
 
         args.trainer_code = 'bert'
@@ -36,7 +36,7 @@ def set_template(args):
         args.enable_lr_schedule = True
         args.decay_step = 25
         args.gamma = 1.0
-        args.num_epochs = 100 if args.dataset_code == 'ml-1m' else 10
+        args.num_epochs = 100 if args.dataset_code == 'ml-1m' else 100
         args.metric_ks = [1, 5, 10, 15, 20, 25, 30]
         args.best_metric = 'NDCG@10'
 
