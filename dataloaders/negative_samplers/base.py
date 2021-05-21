@@ -25,7 +25,7 @@ class AbstractNegativeSampler(metaclass=ABCMeta):
 
     def get_negative_samples(self):
         savefile_path = self._get_save_path()
-        if savefile_path.is_file():
+        if 1==0 and savefile_path.is_file():
             print('Negatives samples exist. Loading.')
             negative_samples = pickle.load(savefile_path.open('rb'))
             return negative_samples
