@@ -22,13 +22,14 @@ def train():
 
 if __name__ == '__main__':
     if args.mode == 'train':
-        i = 64
-        args.blocks_1m_test = False
-        args.bert_hidden_units = i
-        args.dae_latent_dim = i
-        args.vae_latent_dim = i
-        args.dim = 64
-        # args.bert_num_blocks = l
-        train()
+        for l in [1, 2]:
+            i = 64
+            args.blocks_1m_test = True
+            args.bert_hidden_units = i
+            args.dae_latent_dim = i
+            args.vae_latent_dim = i
+            args.dim = 64
+            args.bert_num_heads = l
+            train()
     else:
         raise ValueError('Invalid mode')
