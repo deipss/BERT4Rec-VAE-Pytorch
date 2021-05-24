@@ -39,7 +39,7 @@ def data_load_bert_cnn():
     for root, dirs, files in os.walk(dir):
         for sub_dir in dirs:
             path = root + '/' + sub_dir
-            if 1 ==1  and '05-23' in sub_dir:
+            if 1 ==1  and '_64_' in sub_dir:
                 try:
                     data, data_config = {}, {}
                     data_file = open(path + '/logs/' + 'test_metrics.json')
@@ -52,7 +52,8 @@ def data_load_bert_cnn():
                           % ('Meta_'+data_config['model_code'], data_config['dim'], data_config['dataset_code'],
                              data_config['bert_num_blocks'], data_config['bert_num_heads'], data_to_line(data)))
                 except BaseException:
-                    print()
+                    pass
+                    # print()
 
 def paint_dim_1_4():
     x = ['32', '64', '128', '256']
