@@ -23,7 +23,7 @@ def train():
 
 if __name__ == '__main__':
     if args.mode == 'train':
-        for i in [ 128, 256]:
+        for i in [ 8, 16]:
             args.bert_hidden_units = i
             args.dae_latent_dim = i
             args.vae_latent_dim = i
