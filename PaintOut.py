@@ -46,6 +46,8 @@ def data_load_bert_cnn():
                     data = json.load(data_file)
                     data_file = open(path + '/' + 'config.json')
                     data_config = json.load(data_file)
+                    if not data_config['dim'] in [8,16]:
+                        continue
                     print('%12s\t%3s\t%10s\t%d\t%d\t%s'
                           % ('Meta_'+data_config['model_code'], data_config['dim'], data_config['dataset_code'],
                              data_config['bert_num_blocks'], data_config['bert_num_heads'], data_to_line(data)))
