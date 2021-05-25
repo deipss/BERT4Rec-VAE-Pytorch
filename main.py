@@ -22,7 +22,7 @@ def train():
 
 if __name__ == '__main__':
     if args.mode == 'train':
-        for i in [32, 64, 128, 256]:
+        for i in [ 128, 256]:
             args.blocks_1m_test = True
             args.bert_hidden_units = i
             args.dae_latent_dim = i
