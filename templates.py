@@ -118,7 +118,7 @@ def set_template(args):
 
         args.trainer_code = 'dae'
         args.device = 'cuda'
-        args.num_gpu = 1
+        args.num_gpu = 2
         args.device_idx = '0'
         args.optimizer = 'Adam'
         args.lr = 1e-3
@@ -155,8 +155,8 @@ def set_template(args):
 
         args.trainer_code = 'vae'
         args.device = 'cuda'
-        args.num_gpu = 1
-        args.device_idx = '0'
+        args.num_gpu = 2
+        args.device_idx = '1'
         args.optimizer = 'Adam'
         args.lr = 1e-3
         args.enable_lr_schedule = False
