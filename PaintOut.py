@@ -34,21 +34,26 @@ def data_load():
                       % (infos[1], infos[2], infos[3], data_to_line(data)))
 
 
+
 def data_load_bert_cnn():
     dir = './experiments'
     for root, dirs, files in os.walk(dir):
         for sub_dir in dirs:
             path = root + '/' + sub_dir
-            if '20m' in sub_dir and '_bert_' in sub_dir:
-                data, data_config = {}, {}
-                data_file = open(path + '/logs/' + 'test_metrics.json')
-                data = json.load(data_file)
-                data_file = open(path + '/' + 'config.json')
-                data_config = json.load(data_file)
-                print('%12s\t%3s\t%10s\t%d\t%d\t%s'
-                      % (data_config['model_code'], data_config['dim'], data_config['dataset_code'],
-                         data_config['kernel_size'], data_config['stride'], data_to_line(data)))
+            if 1 ==1  and '25_' in sub_dir:
+                try:
+                    data, data_config = {}, {}
+                    data_file = open(path + '/logs/' + 'test_metrics.json')
+                    data = json.load(data_file)
+                    data_file = open(path + '/' + 'config.json')
+                    data_config = json.load(data_file)
 
+                    print('%12s\t%3s\t%10s\t%d\t%d\t%s'
+                          % ('Meta_'+data_config['model_code'], data_config['dim'], data_config['dataset_code'],
+                             data_config['bert_num_blocks'], data_config['bert_num_heads'], data_to_line(data)))
+                except BaseException:
+                    pass
+                    # print()
 
 def paint_dim_1_4():
     x = ['32', '64', '128', '256']
@@ -163,5 +168,5 @@ def paint_top_1_4():
 font_size=17
 
 if __name__ == '__main__':
-    paint_top_1_4()
+    data_load_bert_cnn()
     # data_load()
