@@ -13,8 +13,10 @@ def data_to_line(data):
     Recall = 'Recall@'
     NDCG = 'NDCG@'
     for i in [1, 5, 10, 15, 20, 25]:
-        r_s += str(round(data[Recall + str(i)], 4)) + '\t'
-        n_s += str(round(data[NDCG + str(i)], 4)) + '\t'
+        r_s += '%.4f' % data[Recall + str(i)] + '\t'
+        n_s += '%.4f' % data[NDCG + str(i)] + '\t'
+        # r_s += str(round(data[Recall + str(i)], 4)) + '\t'
+        # n_s += str(round(data[NDCG + str(i)], 4)) + '\t'
     return r_s + n_s
 
 
@@ -37,6 +39,7 @@ def data_load():
 
 def data_load_bert_cnn():
     dir = './experiments'
+    print('model\tdim\tdataset\tblocks\theads\tepochs\tstride\tkernel_size')
     for root, dirs, files in os.walk(dir):
         for sub_dir in dirs:
             path = root + '/' + sub_dir
