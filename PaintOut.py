@@ -13,8 +13,10 @@ def data_to_line(data):
     Recall = 'Recall@'
     NDCG = 'NDCG@'
     for i in [1, 5, 10, 15, 20, 25]:
-        r_s += str(round(data[Recall + str(i)], 4)) + '\t'
-        n_s += str(round(data[NDCG + str(i)], 4)) + '\t'
+        r_s += '%.4f' % data[Recall + str(i)] + '\t'
+        n_s += '%.4f' % data[NDCG + str(i)] + '\t'
+        # r_s += str(round(data[Recall + str(i)], 4)) + '\t'
+        # n_s += str(round(data[NDCG + str(i)], 4)) + '\t'
     return r_s + n_s
 
 
@@ -37,10 +39,11 @@ def data_load():
 
 def data_load_bert_cnn():
     dir = './experiments'
+    print('model\tdim\tdataset\tblocks\theads\tepochs\tstride\tkernel_size')
     for root, dirs, files in os.walk(dir):
         for sub_dir in dirs:
             path = root + '/' + sub_dir
-            if 1 ==1  and '25_' in sub_dir and '20m' in sub_dir:
+            if 1 ==1 :
                 try:
                     data, data_config = {}, {}
                     data_file = open(path + '/logs/' + 'test_metrics.json')
@@ -48,9 +51,17 @@ def data_load_bert_cnn():
                     data_file = open(path + '/' + 'config.json')
                     data_config = json.load(data_file)
 
-                    print('%12s\t%3s\t%10s\t%d\t%d\t%s'
-                          % (data_config['model_code'], data_config['dim'], data_config['dataset_code'],
-                             data_config['bert_num_blocks'], data_config['bert_num_heads'], data_to_line(data)))
+
+                    print('%12s\t%3s\t%10s\t%d\t%d\t%d\t%d\t%d\t%s'
+                          % (data_config['model_code'],
+                             data_config['dim'],
+                             data_config['dataset_code'],
+                             data_config['bert_num_blocks'],
+                             data_config['bert_num_heads'],
+                             data_config['num_epochs'],
+                             data_config['stride'],
+                             data_config['kernel_size'],
+                             data_to_line(data)))
                 except BaseException:
                     pass
                     # print()
