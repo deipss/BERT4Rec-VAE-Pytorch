@@ -59,7 +59,7 @@ def evaluate(emb, top_k, movie_lists):
 def search_neighbor_item():
     # 读取pandas
     df = generate_meta_map()
-    m_list = [17, 71, 98, 44, 501]
+    m_list = [ 17, 71, 44, 98,501]
     # # 加载模型
     get_E()
     m_list = [mid2idx[i] for i in m_list]
@@ -75,6 +75,27 @@ def search_neighbor_item():
             item_mid = midx2id[k]
             print(get_info_by_sid(df, item_mid))
 
+def search_neighbor_item_all():
+    # 读取pandas
+    df = generate_meta_map()
+    # # 加载模型
+    get_E()
+    m_list = list(mid2idx.values())
+    rst, cos_v = evaluate(E, 11, m_list)
+    cnt = 0
+    print(rst)
+    for i, v in zip(rst, cos_v):
+        print('emb_id=%d\tmovie_id=%d' % (i[0], midx2id[i[0]]))
+        ori_set = get_meta_by_sid(df, midx2id[i[0]])
+        for k, c in zip(i[1:], v[1:]):
+            if k not in midx2id.keys():
+                continue
+            item_mid = midx2id[k]
+            sim_set = get_meta_by_sid(df, item_mid)
+            if len(ori_set & sim_set) > 0:
+                cnt = cnt + 1
+    print('all = %d' % cnt)
+
 
 def generate_meta_map():
     file_path = '/home/deipss/BERT4Rec-VAE-Pytorch-master/Data/ml-1m/movies.dat'
@@ -88,6 +109,11 @@ def get_info_by_sid(df, sid):
     return '' + str(info[0]) + '\t' + str(info[1]) + '\t' + str(info[2])
 
 
+def get_meta_by_sid(df, sid):
+    info = df.loc[df['sid'] == sid].values.tolist()[0]
+    return set((str(info[2])).split('|'))
+
+
 if __name__ == '__main__':
     # df = generate_meta_map()
     # get_info_by_sid(df, 12)
@@ -97,4 +123,4 @@ if __name__ == '__main__':
     args.dae_latent_dim = i
     args.vae_latent_dim = i
     args.dim = i
-    search_neighbor_item()
+    search_neighbor_item_all()
