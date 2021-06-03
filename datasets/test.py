@@ -1,6 +1,6 @@
 import pandas as pd
 
-if __name__ == '__main__':
+def run():
     file_path = ('/home/deipss/BERT4Rec-VAE-Pytorch-master/Data/ml-1m/movies.dat')
     df = pd.read_csv(file_path, sep='::', header=None)
     df.columns = ['sid', 'sname', 'smeta']
@@ -21,3 +21,33 @@ if __name__ == '__main__':
     map = df.set_index('sid').T.to_dict('int')
     a = map['smeta']
     pass
+
+
+import pandas as pd
+import json
+
+import pandas as pd
+import gzip
+
+
+def parse(path):
+    g = open(path, mode='r')
+    for l in g:
+        yield json.loads(l)
+
+
+def getDF(path):
+    df = {}
+    for d in parse(path):
+        df[d['asin']] = d.get('category', [])
+    return df
+
+
+if __name__ == '__main__':
+
+    folder_path2 = '/home/deipss/BERT4Rec-VAE-Pytorch-master/Data/app/meta_Appliances.json'
+    df = getDF(folder_path2)
+    categories_set = set()
+    for v in df.values():
+        categories_set.update(v)
+    print(categories_set)
