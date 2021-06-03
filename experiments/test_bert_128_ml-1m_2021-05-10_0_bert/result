@@ -1,0 +1,61 @@
+[[16, 1164, 537, 840, 2300, 2488, 2872, 378, 3037, 587, 1430], [69, 811, 940, 1410, 2950, 1067, 1597, 180, 760, 1235, 1459], [95, 2596, 2612, 172, 1513, 371, 2155, 3018, 237, 2373, 2141], [43, 3019, 1834, 2623, 934, 3231, 147, 1910, 1336, 2587, 2303], [487, 1629, 3237, 2667, 442, 1375, 812, 2817, 3609, 3201, 1144]]
+emb_id=16	movie_id=17
+17	Sense and Sensibility (1995)	Drama|Romance
+1256	Duck Soup (1933)	Comedy|War
+551	Nightmare Before Christmas, The (1993)	Children's|Comedy|Musical
+901	Funny Face (1957)	Comedy|Musical
+2494	Last Days, The (1998)	Documentary
+2692	Run Lola Run (Lola rennt) (1998)	Action|Crime|Romance
+3088	Harvey (1950)	Comedy
+388	Boys Life (1995)	Drama
+3261	Singles (1992)	Comedy|Drama|Romance
+601	Wooden Man's Bride, The (Wu Kui) (1994)	Drama
+1554	Pillow Book, The (1995)	Drama|Romance
+emb_id=69	movie_id=71
+71	Fair Game (1995)	Action
+867	Carpool (1996)	Comedy|Crime
+1005	D3: The Mighty Ducks (1996)	Children's|Comedy
+1532	Sprung (1997)	Comedy
+3166	Brenda Starr (1989)	Adventure
+1149	JLG/JLG - autoportrait de d�cembre (1994)	Documentary|Drama
+1752	Hard Rain (1998)	Action|Thriller
+186	Nine Months (1995)	Comedy
+806	American Buffalo (1996)	Drama
+1332	Believers, The (1987)	Horror|Thriller
+1590	Event Horizon (1997)	Action|Mystery|Sci-Fi|Thriller
+emb_id=95	movie_id=98
+98	Shopping (1994)	Action|Thriller
+2801	Oscar and Lucinda (a.k.a. Oscar & Lucinda) (1997)	Drama|Romance
+2817	Aces: Iron Eagle III (1992)	Action|War
+178	Love & Human Remains (1993)	Comedy
+1650	Washington Square (1997)	Drama
+381	When a Man Loves a Woman (1994)	Drama
+2348	Sid and Nancy (1986)	Drama
+3242	Santitos (1997)	Comedy
+244	Gumby: The Movie (1995)	Animation|Children's
+2570	Walk on the Moon, A (1999)	Drama|Romance
+2334	Siege, The (1998)	Action|Thriller
+emb_id=43	movie_id=44
+44	Mortal Kombat (1995)	Action|Adventure
+3243	Encino Man (1992)	Comedy
+2014	Freaky Friday (1977)	Children's|Comedy
+2828	Dudley Do-Right (1999)	Children's|Comedy
+998	Set It Off (1996)	Action|Crime
+3464	Solar Crisis (1993)	Sci-Fi|Thriller
+153	Batman Forever (1995)	Action|Adventure|Comedy|Crime
+2091	Return from Witch Mountain (1978)	Children's|Sci-Fi
+1441	Benny & Joon (1993)	Comedy|Romance
+2792	Airplane II: The Sequel (1982)	Comedy
+2497	Message in a Bottle (1999)	Romance
+emb_id=487	movie_id=501
+501	Naked (1993)	Drama
+1798	Hush (1998)	Thriller
+3470	Dersu Uzala (1974)	Adventure|Drama
+2874	Pajama Game, The (1957)	Comedy
+456	Fresh (1994)	Drama
+1489	Cats Don't Dance (1997)	Animation|Children's|Musical
+868	Death in Brunswick (1991)	Comedy
+3031	Repossessed (1990)	Comedy
+3854	Aim�e & Jaguar (1999)	Drama|Romance
+3433	Death Wish 4: The Crackdown (1987)	Action|Drama
+1235	Harold and Maude (1971)	Comedy

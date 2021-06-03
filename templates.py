@@ -5,7 +5,7 @@ def set_template(args):
     elif args.template.startswith('train_bert_cnn'):
         args.mode = 'train'
         args.stride = 2
-        args.kernel_size = 4
+        args.kernel_size = 6
 
         # args.dataset_code = 'ml-' + input('Input 1 for ml-1m, 20 for ml-20m: ') + 'm'
         args.dataset_code = 'ml-1m'
@@ -30,7 +30,7 @@ def set_template(args):
         args.trainer_code = 'bert'
         args.device = 'cuda'
         args.num_gpu = 2
-        args.device_idx = '1'
+        args.device_idx = '0'
         args.optimizer = 'Adam'
         args.lr = 0.001
         args.enable_lr_schedule = True
@@ -54,7 +54,7 @@ def set_template(args):
     elif args.template.startswith('train_bert'):
         args.mode = 'train'
         # args.dataset_code = 'ml-' + input('Input 1 for ml-1m, 20 for ml-20m: ') + 'm'
-        args.dataset_code = 'ml-1m'
+        args.dataset_code = 'ml-10m'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
@@ -70,19 +70,19 @@ def set_template(args):
         args.train_negative_sample_size = 0
         args.train_negative_sampling_seed = 0
         args.test_negative_sampler_code = 'random'
-        args.test_negative_sample_size = 100 if args.dataset_code == 'ml-1m' else 500
+        args.test_negative_sample_size = 500 if args.dataset_code == 'ml-20m' else 100
         args.test_negative_sampling_seed = 98765
 
         args.trainer_code = 'bert'
         args.device = 'cuda'
         args.num_gpu = 2
-        args.device_idx = '1'
+        args.device_idx = '0'
         args.optimizer = 'Adam'
         args.lr = 0.001
         args.enable_lr_schedule = True
         args.decay_step = 25
         args.gamma = 1.0
-        args.num_epochs = 100 if args.dataset_code == 'ml-1m' else 70
+        args.num_epochs = 10 if args.dataset_code == 'ml-20m' else 100
         args.metric_ks = [1, 5, 10, 15, 20, 25, 30]
         args.best_metric = 'NDCG@10'
 
@@ -90,11 +90,11 @@ def set_template(args):
         args.model_init_seed = 0
 
         args.bert_dropout = 0.1
-        args.bert_hidden_units = 256
+        args.bert_hidden_units = 64
         args.bert_mask_prob = 0.15
         args.bert_max_len = 100
         args.bert_num_blocks = 2
-        args.bert_num_heads = 4
+        args.bert_num_heads = 2
         args.dim = args.bert_hidden_units
 
 
@@ -102,7 +102,7 @@ def set_template(args):
     elif args.template.startswith('train_dae'):
         args.mode = 'train'
 
-        args.dataset_code = 'ml-20m'
+        args.dataset_code = 'ml-1m'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
@@ -111,14 +111,14 @@ def set_template(args):
         args.eval_set_size = 100 if args.dataset_code == 'ml-1m' else 500
 
         args.dataloader_code = 'ae'
-        batch = 128 if args.dataset_code == 'ml-1m' else 512
+        batch = 128 if args.dataset_code == 'ml-1m' else 256
         args.train_batch_size = batch
         args.val_batch_size = batch
         args.test_batch_size = batch
 
         args.trainer_code = 'dae'
         args.device = 'cuda'
-        args.num_gpu = 1
+        args.num_gpu = 2
         args.device_idx = '0'
         args.optimizer = 'Adam'
         args.lr = 1e-3
@@ -145,7 +145,7 @@ def set_template(args):
         args.min_sc = 0
         args.split = 'holdout'
         args.dataset_split_seed = 98765
-        args.eval_set_size = 100 if args.dataset_code == 'ml-1m' else 500
+        args.eval_set_size = 100 if args.dataset_code == 'ml-1m' else 256
 
         args.dataloader_code = 'ae'
         batch = 128 if args.dataset_code == 'ml-1m' else 512
@@ -155,8 +155,8 @@ def set_template(args):
 
         args.trainer_code = 'vae'
         args.device = 'cuda'
-        args.num_gpu = 1
-        args.device_idx = '0'
+        args.num_gpu = 2
+        args.device_idx = '1'
         args.optimizer = 'Adam'
         args.lr = 1e-3
         args.enable_lr_schedule = False

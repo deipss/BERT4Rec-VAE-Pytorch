@@ -191,6 +191,9 @@ pip-selfcheck.json
 
 
 Data/ml-20m
+Data/ml-10m
+Data/behavior
+Data/click
 experiments/
 !*.json
 *.nohup
