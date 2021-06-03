@@ -5,10 +5,10 @@ import pandas as pd
 from datetime import date
 
 
-class BehaviorDataset(AbstractDataset):
+class FashionDataset(AbstractDataset):
     @classmethod
     def code(cls):
-        return 'behavior'
+        return 'fashion'
 
     @classmethod
     def url(cls):
@@ -20,13 +20,14 @@ class BehaviorDataset(AbstractDataset):
 
     @classmethod
     def all_raw_file_names(cls):
-        return ['UserBehavior.csv']
+        return ['AMAZON_FASHION.csv',
+                'meta_AMAZON_FASHION.json']
 
     def load_ratings_df(self):
         folder_path = self._get_rawdata_folder_path()
-        file_path = folder_path.joinpath('UserBehavior.csv')
+        file_path = folder_path.joinpath('AMAZON_FASHION.csv')
         df = pd.read_csv(file_path, sep=',', header=None)
-        df.columns = ['uid', 'sid', 'smeta','behavior', 'timestamp']
+        df.columns = ['uid', 'sid', 'rating', 'timestamp']
         return df
 
 

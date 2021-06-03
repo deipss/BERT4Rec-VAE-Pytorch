@@ -61,7 +61,7 @@ def set_template(args):
         args.split = 'leave_one_out'
 
         args.dataloader_code = 'bert'
-        batch = 128
+        batch = 16 if not args.dataset_code.startswith('ml') else 128
         args.train_batch_size = batch
         args.val_batch_size = batch
         args.test_batch_size = batch
@@ -161,7 +161,7 @@ def set_template(args):
         args.lr = 1e-3
         args.enable_lr_schedule = False
         args.weight_decay = 0.01
-        args.num_epochs = 100 if args.dataset_code == 'ml-1m' else 10
+        args.num_epochs = 100 if not args.dataset_code == 'ml-20m' else 10
         args.metric_ks = [1, 5, 15, 10, 20, 25, 30]
         args.best_metric = 'NDCG@10'
         args.total_anneal_steps = 3000 if args.dataset_code == 'ml-1m' else 10000
