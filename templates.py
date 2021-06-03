@@ -54,14 +54,14 @@ def set_template(args):
     elif args.template.startswith('train_bert'):
         args.mode = 'train'
         # args.dataset_code = 'ml-' + input('Input 1 for ml-1m, 20 for ml-20m: ') + 'm'
-        args.dataset_code = 'ml-10m'
+        args.dataset_code = 'fashion'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
         args.split = 'leave_one_out'
 
         args.dataloader_code = 'bert'
-        batch = 128
+        batch = 16 if not args.dataset_code.startswith('ml') else 128
         args.train_batch_size = batch
         args.val_batch_size = batch
         args.test_batch_size = batch
@@ -108,7 +108,7 @@ def set_template(args):
         args.min_sc = 0
         args.split = 'holdout'
         args.dataset_split_seed = 98765
-        args.eval_set_size = 100 if args.dataset_code == 'ml-1m' else 500
+        args.eval_set_size = 500 if args.dataset_code == 'ml-20m' else 100
 
         args.dataloader_code = 'ae'
         batch = 128 if args.dataset_code == 'ml-1m' else 256
@@ -124,7 +124,7 @@ def set_template(args):
         args.lr = 1e-3
         args.enable_lr_schedule = False
         args.weight_decay = 0.00
-        args.num_epochs = 100 if args.dataset_code == 'ml-1m' else 10
+        args.num_epochs = 10 if args.dataset_code == 'ml-20m' else 100
         args.metric_ks = [1, 5, 15, 10, 20, 25, 30]
         args.best_metric = 'NDCG@10'
 
@@ -145,7 +145,7 @@ def set_template(args):
         args.min_sc = 0
         args.split = 'holdout'
         args.dataset_split_seed = 98765
-        args.eval_set_size = 100 if args.dataset_code == 'ml-1m' else 256
+        args.eval_set_size = 256 if args.dataset_code == 'ml-20m' else 100
 
         args.dataloader_code = 'ae'
         batch = 128 if args.dataset_code == 'ml-1m' else 512
@@ -161,7 +161,7 @@ def set_template(args):
         args.lr = 1e-3
         args.enable_lr_schedule = False
         args.weight_decay = 0.01
-        args.num_epochs = 100 if args.dataset_code == 'ml-1m' else 10
+        args.num_epochs = 100 if not args.dataset_code == 'ml-20m' else 10
         args.metric_ks = [1, 5, 15, 10, 20, 25, 30]
         args.best_metric = 'NDCG@10'
         args.total_anneal_steps = 3000 if args.dataset_code == 'ml-1m' else 20000
