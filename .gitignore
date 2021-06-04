@@ -194,6 +194,8 @@ Data/ml-20m
 Data/ml-10m
 Data/behavior
 Data/click
+Data/app
+Data/fashion
 experiments/
 !*.json
 *.nohup
