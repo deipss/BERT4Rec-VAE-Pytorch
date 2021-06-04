@@ -102,7 +102,7 @@ def set_template(args):
     elif args.template.startswith('train_dae'):
         args.mode = 'train'
 
-        args.dataset_code = 'ml-10m'
+        args.dataset_code = 'app'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
