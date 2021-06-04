@@ -5,6 +5,8 @@ from .ml_20m import ML20MDataset
 from .behavior import BehaviorDataset
 from .app import AppDataset
 from .fashion import FashionDataset
+from .card import CardDataset
+from .magazine import MagazineDataset
 
 DATASETS = {
     ML1MDataset.code(): ML1MDataset,
@@ -13,6 +15,8 @@ DATASETS = {
     ML10MDataset.code(): ML10MDataset,
     BehaviorDataset.code(): BehaviorDataset,
     AppDataset.code(): AppDataset,
+    CardDataset.code(): CardDataset,
+    MagazineDataset.code(): MagazineDataset,
     FashionDataset.code(): FashionDataset
 }
 

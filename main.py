@@ -22,8 +22,11 @@ def train():
 
 if __name__ == '__main__':
     if args.mode == 'train':
-        for i in [8,16,32,64]:
-            args.blocks_1m_test = True
+
+        dim_list = [500]
+        if args.trainer_code == 'bert':
+            dim_list = [8, 16, 32, 64]
+        for i in dim_list:
             args.bert_hidden_units = i
             args.dae_latent_dim = i
             args.vae_latent_dim = i

@@ -15,7 +15,7 @@ def set_template(args):
         args.split = 'leave_one_out'
 
         args.dataloader_code = 'bert'
-        batch = 128
+        batch = 6
         args.train_batch_size = batch
         args.val_batch_size = batch
         args.test_batch_size = batch
@@ -54,14 +54,14 @@ def set_template(args):
     elif args.template.startswith('train_bert'):
         args.mode = 'train'
         # args.dataset_code = 'ml-' + input('Input 1 for ml-1m, 20 for ml-20m: ') + 'm'
-        args.dataset_code = 'app'
+        args.dataset_code = 'card'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
         args.split = 'leave_one_out'
 
         args.dataloader_code = 'bert'
-        batch = 16 if not args.dataset_code.startswith('ml') else 128
+        batch = 8 if not args.dataset_code.startswith('ml') else 128
         args.train_batch_size = batch
         args.val_batch_size = batch
         args.test_batch_size = batch
@@ -76,7 +76,7 @@ def set_template(args):
         args.trainer_code = 'bert'
         args.device = 'cuda'
         args.num_gpu = 2
-        args.device_idx = '1'
+        args.device_idx = '0'
         args.optimizer = 'Adam'
         args.lr = 0.001
         args.enable_lr_schedule = True
@@ -102,7 +102,7 @@ def set_template(args):
     elif args.template.startswith('train_dae'):
         args.mode = 'train'
 
-        args.dataset_code = 'ml-1m'
+        args.dataset_code = 'magazine'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
@@ -139,7 +139,7 @@ def set_template(args):
     elif args.template.startswith('train_vae_search_beta'):
         args.mode = 'train'
 
-        args.dataset_code = 'ml-20m'
+        args.dataset_code = 'magazine'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
@@ -156,7 +156,7 @@ def set_template(args):
         args.trainer_code = 'vae'
         args.device = 'cuda'
         args.num_gpu = 2
-        args.device_idx = '1'
+        args.device_idx = '0'
         args.optimizer = 'Adam'
         args.lr = 1e-3
         args.enable_lr_schedule = False
@@ -164,7 +164,7 @@ def set_template(args):
         args.num_epochs = 100 if not args.dataset_code == 'ml-20m' else 10
         args.metric_ks = [1, 5, 15, 10, 20, 25, 30]
         args.best_metric = 'NDCG@10'
-        args.total_anneal_steps = 3000 if args.dataset_code == 'ml-1m' else 20000
+        args.total_anneal_steps = 3000 if args.dataset_code == 'ml-1m' else 10000
         args.find_best_beta = True
 
         args.model_code = 'vae'

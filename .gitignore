@@ -196,6 +196,8 @@ Data/behavior
 Data/click
 Data/app
 Data/fashion
+Data/card
+Data/magazine
 experiments/
 !*.json
 *.nohup
