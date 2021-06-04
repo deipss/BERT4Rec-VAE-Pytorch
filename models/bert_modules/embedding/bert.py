@@ -24,7 +24,7 @@ class BERTEmbedding(nn.Module):
         self.token = TokenEmbedding(vocab_size=vocab_size, embed_size=embed_size)
         self.position = PositionalEmbedding(max_len=max_len, d_model=embed_size)
         # 1M = 21 20M = 27
-        self.meta = MetaEmbedding(vocab_size=200, embed_size=self.token.embedding_dim)
+        self.meta = MetaEmbedding(vocab_size=277, embed_size=self.token.embedding_dim)
         self.dropout = nn.Dropout(p=dropout)
         self.embed_size = embed_size
 

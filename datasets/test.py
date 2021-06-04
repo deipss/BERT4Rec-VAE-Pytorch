@@ -39,15 +39,19 @@ def parse(path):
 def getDF(path):
     df = {}
     for d in parse(path):
+        if not 'category' in d.keys():
+            print(d)
+        print(d.get('category', []))
         df[d['asin']] = d.get('category', [])
     return df
 
 
 if __name__ == '__main__':
 
-    folder_path2 = '/home/deipss/BERT4Rec-VAE-Pytorch-master/Data/app/meta_Appliances.json'
+    folder_path2 = '/home/deipss/BERT4Rec-VAE-Pytorch-master/Data/card/meta_Gift_Cards.json'
     df = getDF(folder_path2)
     categories_set = set()
     for v in df.values():
         categories_set.update(v)
     print(categories_set)
+    print(len(categories_set))
