@@ -62,7 +62,7 @@ class VAETrainer(AbstractTrainer):
 
         # Annealing beta
         if self.finding_best_beta:
-            if self.current_best_metric < metrics[self.best_metric]:
+            if self.current_best_metric <= metrics[self.best_metric]:
                 self.current_best_metric = metrics[self.best_metric]
                 self.best_beta = self.__beta
 
