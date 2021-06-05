@@ -11,6 +11,8 @@ from tqdm import tqdm
 import json
 from abc import *
 from pathlib import Path
+import math
+import numpy as np
 
 
 class AbstractTrainer(metaclass=ABCMeta):
@@ -95,7 +97,7 @@ class AbstractTrainer(metaclass=ABCMeta):
 
             average_meter_set.update('loss', loss.item())
             tqdm_dataloader.set_description(
-                'Epoch {}, loss {:.3f} '.format(epoch+1, average_meter_set['loss'].avg))
+                'Epoch {}, loss {:.3f} '.format(epoch + 1, average_meter_set['loss'].avg))
 
             accum_iter += batch_size
 
@@ -103,7 +105,7 @@ class AbstractTrainer(metaclass=ABCMeta):
                 tqdm_dataloader.set_description('Logging to Tensorboard')
                 log_data = {
                     'state_dict': (self._create_state_dict()),
-                    'epoch': epoch+1,
+                    'epoch': epoch + 1,
                     'accum_iter': accum_iter,
                 }
                 log_data.update(average_meter_set.averages())
@@ -126,7 +128,7 @@ class AbstractTrainer(metaclass=ABCMeta):
 
                 for k, v in metrics.items():
                     average_meter_set.update(k, v)
-                description_metrics = ['NDCG@%d' % k for k in self.metric_ks[:3]] +\
+                description_metrics = ['NDCG@%d' % k for k in self.metric_ks[:3]] + \
                                       ['Recall@%d' % k for k in self.metric_ks[:3]]
                 description = 'Val: ' + ', '.join(s + ' {:.3f}' for s in description_metrics)
                 description = description.replace('NDCG', 'N').replace('Recall', 'R')
@@ -135,7 +137,7 @@ class AbstractTrainer(metaclass=ABCMeta):
 
             log_data = {
                 'state_dict': (self._create_state_dict()),
-                'epoch': epoch+1,
+                'epoch': epoch + 1,
                 'accum_iter': accum_iter,
             }
             log_data.update(average_meter_set.averages())
@@ -160,7 +162,33 @@ class AbstractTrainer(metaclass=ABCMeta):
 
                 for k, v in metrics.items():
                     average_meter_set.update(k, v)
-                description_metrics = ['NDCG@%d' % k for k in self.metric_ks[:3]] +\
+                description_metrics = ['NDCG@%d' % k for k in self.metric_ks[:3]] + \
+                                      ['Recall@%d' % k for k in self.metric_ks[:3]]
+                description = 'Val: ' + ', '.join(s + ' {:.3f}' for s in description_metrics)
+                description = description.replace('NDCG', 'N').replace('Recall', 'R')
+                description = description.format(*(average_meter_set[k].avg for k in description_metrics))
+                tqdm_dataloader.set_description(description)
+
+            average_metrics = average_meter_set.averages()
+            with open(os.path.join(self.export_root, 'logs', 'test_metrics.json'), 'w') as f:
+                json.dump(average_metrics, f, indent=4)
+            print(average_metrics)
+
+    def test_top50(self, top50):
+        print('Test top 50!')
+
+        average_meter_set = AverageMeterSet()
+
+        with torch.no_grad():
+            tqdm_dataloader = tqdm(self.test_loader)
+            for batch_idx, batch in enumerate(tqdm_dataloader):
+                seqs, candidates, labels = batch
+                candidates_list = candidates.tolist()
+                metrics = self._evaluate(candidates_list, top50, self.metric_ks)
+
+                for k, v in metrics.items():
+                    average_meter_set.update(k, v)
+                description_metrics = ['NDCG@%d' % k for k in self.metric_ks[:3]] + \
                                       ['Recall@%d' % k for k in self.metric_ks[:3]]
                 description = 'Val: ' + ', '.join(s + ' {:.3f}' for s in description_metrics)
                 description = description.replace('NDCG', 'N').replace('Recall', 'R')
@@ -177,7 +205,8 @@ class AbstractTrainer(metaclass=ABCMeta):
         if args.optimizer.lower() == 'adam':
             return optim.Adam(self.model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
         elif args.optimizer.lower() == 'sgd':
-            return optim.SGD(self.model.parameters(), lr=args.lr, weight_decay=args.weight_decay, momentum=args.momentum)
+            return optim.SGD(self.model.parameters(), lr=args.lr, weight_decay=args.weight_decay,
+                             momentum=args.momentum)
         else:
             raise ValueError
 
@@ -209,3 +238,22 @@ class AbstractTrainer(metaclass=ABCMeta):
 
     def _needs_to_log(self, accum_iter):
         return accum_iter % self.log_period_as_iter < self.args.train_batch_size and accum_iter != 0
+
+    def _evaluate(self, candidate, top50, ks):
+
+        metrics = {}
+        for k in sorted(ks, reverse=True):
+            rank_list = top50[:k]
+            hit = []  # hit@k 值
+            ndcg = []  # ndcg@k 值
+            for labels in candidate:
+                posi_item = labels[0]
+                if posi_item in rank_list:  # hit@k ndcg@k   值计算
+                    hit.append(1)
+                    ndcg.append(math.log(2) / math.log(2 + rank_list.index(posi_item)))
+                else:
+                    hit.append(0)
+                    ndcg.append(0)
+            metrics['Recall@%d' % k], metrics['NDCG@%d' % k] = np.array(hit).mean(), np.array(ndcg).mean()
+
+        return metrics
