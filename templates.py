@@ -54,7 +54,7 @@ def set_template(args):
     elif args.template.startswith('train_bert'):
         args.mode = 'train'
         # args.dataset_code = 'ml-' + input('Input 1 for ml-1m, 20 for ml-20m: ') + 'm'
-        args.dataset_code = 'card'
+        args.dataset_code = 'magazine'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
@@ -101,7 +101,7 @@ def set_template(args):
 
     elif args.template.startswith('train_dae'):
         args.mode = 'train'
-        args.dataset_code = 'magazine'
+        args.dataset_code = 'card'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
@@ -123,7 +123,7 @@ def set_template(args):
         args.lr = 1e-3
         args.enable_lr_schedule = False
         args.weight_decay = 0.00
-        args.num_epochs = 10 if args.dataset_code == 'ml-20m' else 100
+        args.num_epochs = 10 if args.dataset_code == 'ml-20m' else 300
         args.metric_ks = [1, 5, 15, 10, 20, 25, 30]
         args.best_metric = 'NDCG@10'
 
@@ -138,7 +138,7 @@ def set_template(args):
     elif args.template.startswith('train_vae_search_beta'):
         args.mode = 'train'
 
-        args.dataset_code = 'magazine'
+        args.dataset_code = 'card'
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
@@ -160,7 +160,7 @@ def set_template(args):
         args.lr = 1e-3
         args.enable_lr_schedule = False
         args.weight_decay = 0.01
-        args.num_epochs = 100 if not args.dataset_code == 'ml-20m' else 10
+        args.num_epochs = 300 if not args.dataset_code == 'ml-20m' else 10
         args.metric_ks = [1, 5, 15, 10, 20, 25, 30]
         args.best_metric = 'NDCG@10'
         args.total_anneal_steps = 3000 if args.dataset_code == 'ml-1m' else 10000
