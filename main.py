@@ -32,7 +32,7 @@ if __name__ == '__main__':
     if args.mode == 'train':
 
         dim_list = [500]
-        if args.trainer_code == 'bert':
+        if args.trainer_code in ['bert', 'ncf']:
             dim_list = [8, 16, 32, 64]
         for i in dim_list:
             args.bert_hidden_units = i
@@ -41,6 +41,6 @@ if __name__ == '__main__':
             args.dim = i
             train()
     if args.mode == 'test50':
-            test50()
+        test50()
     else:
         raise ValueError('Invalid mode')
