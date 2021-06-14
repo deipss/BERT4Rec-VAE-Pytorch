@@ -1,5 +1,5 @@
 # Introduction
-
+see **https://github.com/jaywonchung/BERT4Rec-VAE-Pytorch**
 This repository implements models from the following two papers:
 
 > **BERT4Rec: Sequential Recommendation with BERT (Sun et al.)**  
