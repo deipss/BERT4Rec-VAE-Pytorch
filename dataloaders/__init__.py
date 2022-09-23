@@ -1,11 +1,12 @@
 from datasets import dataset_factory
 from .bert import BertDataloader
 from .ae import AEDataloader
-
+from .ncf import NCFDataloader
 
 DATALOADERS = {
     BertDataloader.code(): BertDataloader,
-    AEDataloader.code(): AEDataloader
+    AEDataloader.code(): AEDataloader,
+    NCFDataloader.code(): NCFDataloader
 }
 
 

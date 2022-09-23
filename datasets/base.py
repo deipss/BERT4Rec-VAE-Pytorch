@@ -115,7 +115,7 @@ class AbstractDataset(metaclass=ABCMeta):
 
     def make_implicit(self, df):
         print('Turning into implicit ratings')
-        df = df[df['rating'] >= self.min_rating]
+        # df = df[df['rating'] >= self.min_rating]
         # return df[['uid', 'sid', 'timestamp']]
         return df
 
@@ -156,6 +156,14 @@ class AbstractDataset(metaclass=ABCMeta):
         cnx.close()
         df.columns = ['sid']
         return df['sid']
+
+    def get_count_top50(self, df):
+        print('get_count_top50')
+        # value_counts默认会降序
+        cnt = df['sid'].value_counts()
+        top50 = cnt.head(50)
+        top50 = top50.index.tolist()
+        return top50
 
     def split_df(self, df, user_count):
         if self.args.split == 'leave_one_out':

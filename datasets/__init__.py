@@ -1,4 +1,5 @@
 from .ml_1m import ML1MDataset
+from .ml_10m import ML10MDataset
 from .ml_100k import ML100KDataset
 from .ml_20m import ML20MDataset
 from .db import DbDataset
