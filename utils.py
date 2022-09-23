@@ -34,6 +34,7 @@ def create_experiment_export_folder(args):
 
 
 def get_name_of_experiment_path(experiment_dir, experiment_description, args):
+
     experiment_path = os.path.join(experiment_dir, (experiment_description + "_" + str(date.today())))
     idx = _get_experiment_index(experiment_path)
     experiment_path = experiment_path + "_" + str(idx)

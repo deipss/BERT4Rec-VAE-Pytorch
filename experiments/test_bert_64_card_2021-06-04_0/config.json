@@ -1,7 +1,10 @@
 {
   "mode": "train",
   "template": "train_bert",
+<<<<<<< HEAD
   "blocks_1m_test": false,
+=======
+>>>>>>> master
   "test_model_path": null,
   "dataset_code": "card",
   "min_rating": 4,
@@ -24,7 +27,11 @@
   "trainer_code": "bert",
   "device": "cuda",
   "num_gpu": 1,
+<<<<<<< HEAD
   "device_idx": "1",
+=======
+  "device_idx": "0",
+>>>>>>> master
   "optimizer": "Adam",
   "lr": 0.001,
   "weight_decay": 0,
