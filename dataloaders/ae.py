@@ -91,7 +91,6 @@ class AETrainDataset(data_utils.Dataset):
         for user, useritem in enumerate(user2items.values()):
             for _ in range(len(useritem)):
                 user_row.append(user)
-
         # Column indices for sparse matrix
         item_col = []
         for useritem in user2items.values():
@@ -101,6 +100,7 @@ class AETrainDataset(data_utils.Dataset):
         assert len(user_row) == len(item_col)
         sparse_data = sparse.csr_matrix((np.ones(len(user_row)), (user_row, item_col)),
                                         dtype='float64', shape=(len(user2items), item_count))
+
 
         # Convert to torch tensor
         self.data = torch.FloatTensor(sparse_data.toarray())
@@ -127,7 +127,6 @@ class AEEvalDataset(data_utils.Dataset):
             for _ in range(len(label_items)):
                 label_user_row.append(user)
         input_user_row, label_user_row = np.array(input_user_row), np.array(label_user_row)
-
         # Column indices for sparse matrix
         input_item_col = np.hstack(input_list)
         label_item_col = np.hstack(label_list)
@@ -141,6 +140,7 @@ class AEEvalDataset(data_utils.Dataset):
         # Convert to torch tensor
         self.input_data = torch.FloatTensor(sparse_input.toarray())
         self.label_data = torch.FloatTensor(sparse_label.toarray())
+
 
     def split_input_label_proportion(self, data, label_prop=0.2):
         input_list, label_list = [], []

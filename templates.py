@@ -9,6 +9,7 @@ def set_template(args):
 
         # args.dataset_code = 'ml-' + input('Input 1 for ml-1m, 20 for ml-20m: ') + 'm'
         args.dataset_code = 'ml-1m'
+
         args.min_rating = 0 if args.dataset_code == 'ml-1m' else 4
         args.min_uc = 5
         args.min_sc = 0
@@ -25,6 +26,7 @@ def set_template(args):
         args.train_negative_sampling_seed = 0
         args.test_negative_sampler_code = 'random'
         args.test_negative_sample_size = 100 if args.dataset_code == 'ml-1m' else 500
+        args.test_negative_sample_size = 100
         args.test_negative_sampling_seed = 98765
 
         args.trainer_code = 'bert'
@@ -41,6 +43,7 @@ def set_template(args):
         args.best_metric = 'NDCG@10'
 
         args.model_code = 'bert_cnn'
+
         args.model_init_seed = 0
 
         args.bert_dropout = 0.1

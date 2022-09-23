@@ -11,8 +11,11 @@ from tqdm import tqdm
 import json
 from abc import *
 from pathlib import Path
+<<<<<<< HEAD
 import math
 import numpy as np
+=======
+>>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de
 
 
 class AbstractTrainer(metaclass=ABCMeta):
@@ -97,7 +100,11 @@ class AbstractTrainer(metaclass=ABCMeta):
 
             average_meter_set.update('loss', loss.item())
             tqdm_dataloader.set_description(
+<<<<<<< HEAD
                 'Epoch {}, loss {:.3f} '.format(epoch + 1, average_meter_set['loss'].avg))
+=======
+                'Epoch {}, loss {:.3f} '.format(epoch+1, average_meter_set['loss'].avg))
+>>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de
 
             accum_iter += batch_size
 
@@ -105,7 +112,11 @@ class AbstractTrainer(metaclass=ABCMeta):
                 tqdm_dataloader.set_description('Logging to Tensorboard')
                 log_data = {
                     'state_dict': (self._create_state_dict()),
+<<<<<<< HEAD
                     'epoch': epoch + 1,
+=======
+                    'epoch': epoch+1,
+>>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de
                     'accum_iter': accum_iter,
                 }
                 log_data.update(average_meter_set.averages())
@@ -120,7 +131,11 @@ class AbstractTrainer(metaclass=ABCMeta):
         average_meter_set = AverageMeterSet()
 
         with torch.no_grad():
+<<<<<<< HEAD
             tqdm_dataloader = tqdm(self.test_loader)
+=======
+            tqdm_dataloader = tqdm(self.val_loader)
+>>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de
             for batch_idx, batch in enumerate(tqdm_dataloader):
                 batch = [x.to(self.device) for x in batch]
 
@@ -128,7 +143,11 @@ class AbstractTrainer(metaclass=ABCMeta):
 
                 for k, v in metrics.items():
                     average_meter_set.update(k, v)
+<<<<<<< HEAD
                 description_metrics = ['NDCG@%d' % k for k in self.metric_ks[:3]] + \
+=======
+                description_metrics = ['NDCG@%d' % k for k in self.metric_ks[:3]] +\
+>>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de
                                       ['Recall@%d' % k for k in self.metric_ks[:3]]
                 description = 'Val: ' + ', '.join(s + ' {:.3f}' for s in description_metrics)
                 description = description.replace('NDCG', 'N').replace('Recall', 'R')
@@ -137,7 +156,11 @@ class AbstractTrainer(metaclass=ABCMeta):
 
             log_data = {
                 'state_dict': (self._create_state_dict()),
+<<<<<<< HEAD
                 'epoch': epoch + 1,
+=======
+                'epoch': epoch+1,
+>>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de
                 'accum_iter': accum_iter,
             }
             log_data.update(average_meter_set.averages())
@@ -162,6 +185,7 @@ class AbstractTrainer(metaclass=ABCMeta):
 
                 for k, v in metrics.items():
                     average_meter_set.update(k, v)
+<<<<<<< HEAD
                 description_metrics = ['NDCG@%d' % k for k in self.metric_ks[:3]] + \
                                       ['Recall@%d' % k for k in self.metric_ks[:3]]
                 description = 'Val: ' + ', '.join(s + ' {:.3f}' for s in description_metrics)
@@ -189,6 +213,9 @@ class AbstractTrainer(metaclass=ABCMeta):
                 for k, v in metrics.items():
                     average_meter_set.update(k, v)
                 description_metrics = ['NDCG@%d' % k for k in self.metric_ks[:3]] + \
+=======
+                description_metrics = ['NDCG@%d' % k for k in self.metric_ks[:3]] +\
+>>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de
                                       ['Recall@%d' % k for k in self.metric_ks[:3]]
                 description = 'Val: ' + ', '.join(s + ' {:.3f}' for s in description_metrics)
                 description = description.replace('NDCG', 'N').replace('Recall', 'R')
@@ -205,8 +232,12 @@ class AbstractTrainer(metaclass=ABCMeta):
         if args.optimizer.lower() == 'adam':
             return optim.Adam(self.model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
         elif args.optimizer.lower() == 'sgd':
+<<<<<<< HEAD
             return optim.SGD(self.model.parameters(), lr=args.lr, weight_decay=args.weight_decay,
                              momentum=args.momentum)
+=======
+            return optim.SGD(self.model.parameters(), lr=args.lr, weight_decay=args.weight_decay, momentum=args.momentum)
+>>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de
         else:
             raise ValueError
 
@@ -238,6 +269,7 @@ class AbstractTrainer(metaclass=ABCMeta):
 
     def _needs_to_log(self, accum_iter):
         return accum_iter % self.log_period_as_iter < self.args.train_batch_size and accum_iter != 0
+<<<<<<< HEAD
 
     def _evaluate(self, candidate, top50, ks):
 
@@ -257,3 +289,5 @@ class AbstractTrainer(metaclass=ABCMeta):
             metrics['Recall@%d' % k], metrics['NDCG@%d' % k] = np.array(hit).mean(), np.array(ndcg).mean()
 
         return metrics
+=======
+>>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de

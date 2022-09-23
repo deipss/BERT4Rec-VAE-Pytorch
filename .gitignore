@@ -1,7 +1,7 @@
 *.un~
 *.pyc
 *.swp
-# *.json
+*.json
 res/
 .DS_Store
 
@@ -189,6 +189,7 @@ pip-selfcheck.json
 
 .vscode/
 
+<<<<<<< HEAD
 
 Data/ml-20m
 Data/ml-10m
@@ -202,3 +203,7 @@ experiments/
 !*.json
 *.nohup
 Data/preprocessed
+=======
+Data/
+experiments/
+>>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de
