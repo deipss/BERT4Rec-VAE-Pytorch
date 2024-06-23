@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import os
 import json
 
@@ -65,7 +64,6 @@ def data_load_bert_cnn():
                 except BaseException:
                     pass
                     # print()
-
 def paint_dim_1_4():
     x = ['32', '64', '128', '256']
     fig = plt.figure(figsize=(40, 10), dpi=80)
@@ -179,5 +177,6 @@ def paint_top_1_4():
 font_size=17
 
 if __name__ == '__main__':
-    data_load_bert_cnn()
+    paint_dim_1_4()
+    # data_load_bert_cnn()
     # data_load()

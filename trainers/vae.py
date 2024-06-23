@@ -3,7 +3,6 @@ from .utils import recalls_and_ndcgs_for_ks
 from loggers import MetricGraphPrinter
 
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
 
 
@@ -62,11 +61,7 @@ class VAETrainer(AbstractTrainer):
 
         # Annealing beta
         if self.finding_best_beta:
-<<<<<<< HEAD
-            if self.current_best_metric <= metrics[self.best_metric]:
-=======
             if self.current_best_metric < metrics[self.best_metric]:
->>>>>>> f66f2534ebfd937778c7174b5f9f216efdebe5de
                 self.current_best_metric = metrics[self.best_metric]
                 self.best_beta = self.__beta
 

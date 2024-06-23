@@ -2,8 +2,9 @@ from .base import AbstractDataset
 
 import pandas as pd
 
-from datetime import date
-
+'''
+https://grouplens.org/datasets/movielens/10m/
+'''
 
 class MagazineDataset(AbstractDataset):
     @classmethod

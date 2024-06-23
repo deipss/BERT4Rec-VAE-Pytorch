@@ -2,7 +2,6 @@ from .base import AbstractDataset
 
 import pandas as pd
 
-from datetime import date
 
 
 class BehaviorDataset(AbstractDataset):

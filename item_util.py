@@ -1,4 +1,3 @@
-import torch
 import pandas as pd
 from options import args
 from models import model_factory
