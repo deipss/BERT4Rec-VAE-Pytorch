@@ -48,8 +48,6 @@ def _get_experiment_index(experiment_path):
     return idx
 
 
-def load_weights(model, path):
-    pass
 
 
 def save_test_result(export_root, result):
